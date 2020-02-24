@@ -47,8 +47,8 @@ class NGridworld():
 
     def step(self, current_state, actions):
         next_state = np.zeros((self.n_players, 2))
-        rewards = np.zeros(self.n_players)
-        done = np.zeros(self.n_players) #Should incorporate the goal state for ALL players, not just if one makes it...
+        rewards = np.ones(self.n_players)
+        done = np.zeros(self.n_players)
 
         for n in range(self.n_players):
             player_state = current_state[n]
@@ -56,10 +56,8 @@ class NGridworld():
             player_next_state = self.get_next_state(player_state, player_action)
 
             if np.all(player_next_state == self.goal_states[n]):
-                #print('ps', n, player_next_state, self.goal_states[n])
                 rewards[n] = 10
                 done[n] = 1
-                #print(done)
             else:
                 rewards[n] = 0
 
@@ -68,8 +66,12 @@ class NGridworld():
 
             next_state[n, :] = player_next_state
 
-        if np.all(next_state[0] == next_state[1]): #This works for two players ONLY
-            next_state = current_state
+        for n in range(self.n_players):
+            for m in range(self.n_players):
+                if n != m:
+                    if np.all(next_state[n] == next_state[m]): #This works for two players ONLY
+                        next_state[n] = current_state[n]
+                        next_state[m] = current_state[m]
 
         return next_state, rewards, done
 
