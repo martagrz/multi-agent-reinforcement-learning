@@ -10,7 +10,7 @@ def run(env, episodes, alpha, gamma, epsilon, error_variance, error=False):
     q_table, optimal_policy, number_steps = algo.train(episodes)
     # action_path, rewards_list = algo.evaluate()
     for player in range(n_players):
-        quiver_plot(env, player, optimal_policy)
+        quiver_plot(env, player, optimal_policy, error_variance)
 
     return number_steps
 
@@ -38,11 +38,10 @@ for i in range(len(error_variance)):
     n_steps[i, :] = run(env, episodes, alpha, gamma, epsilon, variance, error=True)
 
 for i in range(len(error_variance)):
-    plt.plot(range(episodes)[::plot_steps], n_steps[i, :][::plot_steps], label='Error {}'.format(error_variance[i]))
+    plt.plot(range(episodes)[::plot_steps], n_steps[i, :][::plot_steps], label='Error = {}'.format(error_variance[i]))
 
 plt.xlabel('Episode')
 plt.ylabel('Number of steps')
 plt.legend()
-plt.savefig('./figures/n_steps_convergence')
-plt.show()
+plt.savefig('./figures/n_steps_convergence.pdf')
 plt.close()
