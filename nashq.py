@@ -83,9 +83,9 @@ class NashQLearning():
                 #if i % 10 == 0:
                 #    print('\n', 'Episode: ', _, 'Step: ', i, 'Rewards: ', cumulative_rewards)
 
-            if _ % 1 == 0:
-                print('\n', 'Episode', _, 'converged.')
-            print(done)
+            #if _ % 100 == 0:
+                #print('\n', 'Episode', _, 'converged.')
+            #print(done)
 
         return self.q_tables
 
@@ -107,7 +107,7 @@ class NashQLearning():
             #print('actions', actions, 'state', state)
 
             next_state, rewards, done = self.env.step(state, actions)
-            print(state)
+            #print(state)
             #print(state, actions, done)
 
             state = next_state

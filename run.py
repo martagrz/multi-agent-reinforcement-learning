@@ -2,6 +2,7 @@ import numpy as np
 from env import NGridworld
 from nashq import NashQLearning
 
+np.random.seed(10)
 n_players = 2
 n_rows = 4
 n_cols = 4
@@ -16,13 +17,8 @@ episodes = 1000
 env = NGridworld(n_players, n_rows, n_cols, init_states, goal_states)
 algo = NashQLearning(env, alpha, gamma, epsilon)
 q_table = algo.train(episodes)
-print(algo.q_tables[0][0])
-print(algo.q_tables[1][1])
-
-print(np.argmax(q_table[0][0][0]))
-
-
-
+#print(algo.q_tables[0][0])
+#print(algo.q_tables[1][1])
 
 action_path, rewards_list = algo.evaluate()
 
