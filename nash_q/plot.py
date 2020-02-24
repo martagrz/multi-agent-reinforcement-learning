@@ -40,7 +40,7 @@ def quiver_plot(env, player, policy, name):
 
     U = U.reshape((env.n_rows, env.n_cols))
     V = V.reshape((env.n_rows, env.n_cols))
-    string = './figures/optimal_policy_{}'.format(player) + '_{}.pdf'.format(name)
+    string = './figures/optimal_policy_cross_{}'.format(player) + '_{}.png'.format(name)
     string = str(string)
     fig, ax = plt.subplots()
     ax.quiver(X, Y, U, V, scale=25)

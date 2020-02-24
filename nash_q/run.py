@@ -20,14 +20,14 @@ np.random.seed(0)
 n_players = 2
 n_rows = 4
 n_cols = 4
-init_states = np.array(((0, 0), (0, 2)))
-goal_states = np.array(((3, 2), (3, 3)))
+init_states = np.array(((0, 0), (0, 3)))
+goal_states = np.array(((3, 3), (3, 0)))
 alpha = 0.2
 gamma = 0.6
 epsilon = 0.2
-episodes = 100
+episodes = 1000
 plot_steps = 10
-error_variance = np.arange(0, 2, 0.5)
+error_variance = [0,1]
 
 env = NGridworld(n_players, n_rows, n_cols, init_states, goal_states)
 
@@ -43,5 +43,5 @@ for i in range(len(error_variance)):
 plt.xlabel('Episode')
 plt.ylabel('Number of steps')
 plt.legend()
-plt.savefig('./figures/n_steps_convergence.pdf')
+plt.savefig('./figures/n_steps_cross_convergence.png')
 plt.close()
